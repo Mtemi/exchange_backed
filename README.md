@@ -1,123 +1,88 @@
-=====================================
+Main technique
+rear end：Spring、SpringMVC、SpringData、SpringCloud、SpringBoot
+Database: Mysql, Mongodb
+Others: redis, kafka, Alibaba Cloud OSS, Tencent waterproof verification, Huanxin push
+Front-end: Vue, iView, less
+Both IOS and Android versions are available.
+cloud
+Provides the SpringCloud microservice registry function, which is a basic module and must be deployed
+Dependency service: none
+ucenter-api
+Provide user-related interfaces (such as login, registration, asset list), this module is the basic module and must be deployed
+Dependent services: mysql, kafka, redis, mongodb, SMS interface, email account
+otc-api
+Provide OTC function interface, if there is no OTC transaction, it can not be deployed
+Dependent services: mysql, redis, mongodb, SMS interface
+exchange-api
+Provide currency transaction interface, projects without currency transaction can not be deployed
+Dependent services: mysql, redis, mongodb, kafka
+chat
+Provide real-time communication interface, basic module, need to be deployed
+Dependent services: mysql, redis, mongodb
+admin
+Provides all service interfaces of the management background, which must be deployed
+Dependent services: mysql, redis, mongodb
+wallet
+Provide wallet services such as depositing, withdrawing, and obtaining addresses. It is the basic module and must be deployed.
+Dependent services: mysql, mongodb, kafka, cloud
+market
+Provides interface services such as currency price, K-line, and real-time transactions, and OTC transactions do not require deployment
+Dependent services: mysql, redis, mongodb, kafka, cloud
+exchange
+Provide matching transaction services, OTC transactions do not require deployment
+Dependent services: mysql, mongodb, kafka
+contract-swap-api
+Provide interface services such as contract currency price, K line, market news subscription, real-time transaction, etc.
+Dependent services: mysql, redis, mongodb, kafka, cloud
+open-api (undeveloped)
+Provide user API interface
+Dependent services: mysql, redis, mongodb, kafka, cloud
 
-### 主要技术
+Key business introduction
+The core modules of the back-end framework are exchange and market modules.
 
-- 后端：Spring、SpringMVC、SpringData、SpringCloud、SpringBoot
-- 数据库：Mysql、Mongodb
-- 其他：redis、kafka、阿里云OSS、腾讯防水校验、环信推送
-- 前端：Vue、iView、less
-- 同时提供IOS和Android版本。
+The exhcnge module completely adopts the Java memory processing queue, which greatly speeds up the processing logic, does not involve database operations, and ensures fast processing speed. After the project is started, it adopts the method of inheriting ApplicationListener and runs automatically;
 
+Unprocessed orders are automatically loaded after startup and reloaded into the JVM to ensure the accuracy of the data. After the exchange processes the orders, the transaction records are sent to the market;
 
-1. cloud
+The market module is mainly a database operation, which persists user change information to the database. The main difficulty lies in interacting with the front-end socket push. There are two ways for socket push. The web side socket uses SpringSocket, and the mobile terminal uses Netty push. The netty push is processed by timed tasks.
 
-- 提供SpringCloud微服务注册中心功能，为基础模块，必须部署
-- 依赖服务：无
+Environment construction
+Cents 7.8
+MySQL 5.7.16
+Redis 6.0
+Mongodb 4.0
+kafka_2.11-2.2.1
+nginx-1.19.0
+JDK 1.8
+Vue
+Zookeeper
+Preparing for service deployment
+The project uses the Lombok plug-in, no matter what IDE tool you use, be sure to install the Lombok plug-in first
+The project uses QueryDsl. If the class starting with Q cannot be found, please compile the corresponding core module first, such as core, exchange-core, and xxx-core.
+The jar package not found is in the project jar folder
+jdk version 1.8 and above
+Initialize sql in the sql folder to configure the configuration file. Opening this setting will automatically create a table #jpa #spring.jpa.hibernate.ddl-auto=update.
+Modify service configuration file
+Please modify the following configuration according to the actual deployment of the service. The location of the configuration file is as follows. If there is no configuration in the configuration file, it means that the module does not use this function and does not need to be added:
 
-2. ucenter-api
+Each module /src/main/resources/application.properties
 
-- 提供用户相关的接口（如登录、注册、资产列表）,该模块为基础为基础模块，必须部署
-- 依赖服务：mysql,kafka,redis,mongodb,短信接口，邮箱账号
+### service start
+ 1. maven build package service
 
-3. otc-api
+ 2. Upload the XX.jar under the target folder of each module to your own server
 
-- 提供场外交易功能接口，没有场外交易的可以不部署
-- 依赖服务：mysql,redis,mongodb,短信接口
+ 3. Start the cloud module first, then start the market and exchange modules, and the rest are in no order.
 
-4. exchange-api
-
-- 提供币币交易接口，没有币币交易的项目可以不部署
-- 依赖服务：mysql,redis,mongodb,kafka
-
-5. chat
-
-- 提供实时通讯接口，基础模块，需要部署
-- 依赖服务：mysql,redis,mongodb
-
-6. admin
-
-- 提供管理后台的所有服务接口，必须部署
-- 依赖服务：mysql,redis,mongodb
-
-7. wallet
-
-- 提供充币、提币、获取地址等钱包服务，为基础模块，必须部署
-- 依赖服务：mysql,mongodb,kafka,cloud
-
-8. market
-
-- 提供币种价格、k线、实时成交等接口服务，场外交易不需要部署
-- 依赖服务：mysql,redis,mongodb,kafka,cloud
-
-9. exchange
-
-- 提供撮合交易服务，场外交易不需要部署
-- 依赖服务：mysql,mongodb,kafka
-
-10. contract-swap-api
-- 提供合约币种价格、K线、盘口消息订阅、实时成交等接口服务
-- 依赖服务：mysql,redis,mongodb,kafka,cloud
-
-11. open-api(未开发完成)
-- 提供用户API接口
-- 依赖服务：mysql,redis,mongodb,kafka,cloud
-
-##  重点业务介绍
-
-    后端框架的核心模块为 exchange,market模块。
-
-    其中exhcnge模块完全采用Java内存处理队列,大大加快处理逻辑,中间不牵涉数据库操作,保证处理速度快,其中项目启动后采用继承ApplicationListener方式，自动运行；
-
-    启动后自动加载未处理的订单,重新加载到JVM中，从而保证数据的准确，exchange将订单处理后，将成交记录发送到market;
-
-    market模块主要都是数据库操作，将用户变化信息持久化到数据库中。主要难点在于和前端交互socket推送，socket推送采用两种方式，web端socket采用SpringSocket，移动端采用Netty推送,其中netty推送通过定时任务处理。
-	
-	
-
-## 环境搭建
-- Centos 7.8
-- MySQL 5.7.16
-- Redis 6.0
-- Mongodb 4.0
-- kafka_2.11-2.2.1
-- nginx-1.19.0
-- JDK 1.8
-- Vue
-- Zookeeper
-
-## 服务部署准备
-
-1. 项目用了Lombok插件，无论用什么IDE工具，请务必先安装Lombok插件
-2. 项目用了QueryDsl，如果遇见以Q开头的类找不到，请先编译一下对应的core模块，例如core、exchange-core、xxx-core这种模块
-3. 找不到的jar包在项目jar文件夹下
-4. jdk版本1.8以上
-5. 初始化sql在sql文件夹中配置文件
-配置文件打开这个设置会自动建表
-#jpa
-#spring.jpa.hibernate.ddl-auto=update.
-
-## 修改服务配置文件
-请根据服务实际部署情况修改以下配置。配置文件位置如下，如果配置文件中没有某一项配置，说明该模块未使用到该项功能，无需添加：
-
-```
-各个模块/src/main/resources/application.properties
+### Questions and suggestions
+- With Issue, we will follow up with answers in a timely manner.
+- Join the exchange group: Blockchain exchange technical knowledge exchange group [QQ group: 735446452]
+- E-mail: xunibidev@gmail.com
 
 
-### 服务启动
- 1. maven构建打包服务
-
- 2. 将各个模块target文件夹下的XX.jar上传到自己的服务器
-
- 3. 先启动cloud模块，再启动market，exchange模块，剩下的没有顺序。
-
-### 提问和建议
-- 使用Issuse，我们会及时跟进解答。
-- 加入交流群：区块链交易所技术知识交流群【QQ群:735446452】
-- E-mail:xunibidev@gmail.com
-
-
-注意事项：
-当内存不足时，在linux控制台输入top可以查看java进程占用了大量内存（一个java进程占用1G以上），因为有很多jar包需要运行，所以需要控制某些jar包使用的内存，目前控制以下4个：
+Precautions:
+When the memory is insufficient, enter top in the linux console to see that the java process occupies a lot of memory (a java process occupies more than 1G). Because there are many jar packages to run, it is necessary to control the memory used by some jar packages. Currently, the following control is performed 4:
 
 - java -jar -Xms512m -Xmx512m -Xmn200m -Xss256k  admin-api.jar
 
