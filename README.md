@@ -1,4 +1,6 @@
 Main technique
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 rear end：Spring、SpringMVC、SpringData、SpringCloud、SpringBoot
 Database: Mysql, Mongodb
 Others: redis, kafka, Alibaba Cloud OSS, Tencent waterproof verification, Huanxin push
@@ -57,6 +59,8 @@ nginx-1.19.0
 JDK 1.8
 Vue
 Zookeeper
+
+
 Preparing for service deployment
 The project uses the Lombok plug-in, no matter what IDE tool you use, be sure to install the Lombok plug-in first
 The project uses QueryDsl. If the class starting with Q cannot be found, please compile the corresponding core module first, such as core, exchange-core, and xxx-core.
@@ -77,8 +81,8 @@ Each module /src/main/resources/application.properties
 
 ### Questions and suggestions
 - With Issue, we will follow up with answers in a timely manner.
-- Join the exchange group: Blockchain exchange technical knowledge exchange group [QQ group: 735446452]
-- E-mail: xunibidev@gmail.com
+- Whatsapp:  +254728141235
+- E-mail: bmutua350@gmail.com
 
 
 Precautions:
