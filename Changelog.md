@@ -1,31 +1,31 @@
-## 20201108
-- 更新项目名为pro.bizzan
-- 修复jar引入路径
-- 增加统一配置中心，简化配置
-## 2020111
-- 修复合约部分bug
-## 20201215
-- 增加无限级代理
-## 20201229
-- uc增加国际化
-- 增加短信提供商到飞鸽
-## 20210111
-- UC增加帮助多语言
-- SWAP增加接口国际化
-## 20210117
-- 修改快速兑换、优化国际化
-- 提币判断是否实名
-## 20210119
-- 增加合约插针功能
-- 优化扎针k线
-## 20210120
-- 期权合约增加预设价格、控制kline
-- 增加后台设置期权订单
+##20201108
+- Updated project named pro.bizzan
+- Fix jar import path
+- Added unified configuration center to simplify configuration
+##2020111
+- Fixed some bugs in contracts
+##20201215
+- Add unlimited proxy
+##20201229
+- uc increases internationalization
+- Added SMS provider to Flying Pigeon
+##20210111
+- UC added help for multiple languages
+- SWAP adds interface internationalization
+##20210117
+- Modify fast exchange, optimize internationalization
+- Judging whether the withdrawal is real name
+##20210119
+- Add contract pin function
+- Optimized the needle thread
+##20210120
+- Option contracts increase preset price, control kline
+- Added option order setting in background
 
-## 20210202(技术支持iceman123)
-- 替换sun.misc.BASE64Encoder 老式base64编码
-- 修复jackson 高危漏洞、修复fastjson 高危漏洞、修复netty高危漏洞、修复shiro高危漏洞、修复protobuf低危漏洞、修复若干低危漏洞，升级springboot jar包、排除重复导包
-- 删除错误的dubbo引入
-- 修复Pom 鸡肋警告
-- 修复若干高危漏洞
-- 删除原来sql文件、添加完整数据库文件（sql目录）、修复启动报scopedTarget.eurekaClient错误
+## 20210202 (technical support bmutua350@gmail.com)
+- replace sun.misc.BASE64Encoder old base64 encoding
+- Repair jackson high-risk vulnerability, fix fastjson high-risk vulnerability, repair netty high-risk vulnerability, repair shiro high-risk vulnerability, repair protobuf low-risk vulnerability, repair several low-risk vulnerabilities, upgrade springboot jar package, exclude duplicate import packages
+- Removed wrong dubbo import
+- Fixed Pom's tasteless warning
+- Fixed several high-risk vulnerabilities
+- Delete the original sql file, add a complete database file (sql directory), and fix the startup report scopedTarget.eurekaClient error

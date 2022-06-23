@@ -1,6 +1,9 @@
 Main technique
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 rear end：Spring、SpringMVC、SpringData、SpringCloud、SpringBoot
 Database: Mysql, Mongodb
 Others: redis, kafka, Alibaba Cloud OSS, Tencent waterproof verification, Huanxin push

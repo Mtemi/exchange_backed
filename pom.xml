@@ -7,7 +7,7 @@
 	<version>1.0</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
-	<description>数字货币交易系统父节点</description>
+	<description>The parent node of the digital currency trading system</description>
 	<url>bizzan.com</url>
 
 	<parent>
