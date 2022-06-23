@@ -1,10 +1,4 @@
-Bizzan数字货币交易系统
-
 =====================================
-# Donation：
-#### 您的捐赠是我们开发最大的动力
-- BTC/USDT(比特币/USDT)：1Dwwqhw9pV9iSSQwuJc8nAygda7XfahaoW
-- ETH/USDT(以太坊/USDT)：0x4f1ea0f10aa99f608f31f70b4d3119f6928693ed
 
 ### 主要技术
 
